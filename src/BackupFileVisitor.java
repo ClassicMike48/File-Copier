@@ -25,8 +25,7 @@ public class BackupFileVisitor implements FileVisitor<Path> {
 
     /**
      * Instantiates a new Backup file visitor.
-     *
-     * @param dest the dest
+     * @param dest the directory to place copied files
      */
     public BackupFileVisitor(Path dest) {
         this.dest = dest;
@@ -63,13 +62,11 @@ public class BackupFileVisitor implements FileVisitor<Path> {
         fullDestination = fullDestination.resolve(file.getFileName());
 
         System.out.printf("Date: %s %s\n", month, year);
-        System.out.println("Copying to: " + fullDestination.toString());
+        System.out.println("Copying to: " + fullDestination);
 
         //Complete action
         copyFile(file, fullDestination, true, true);
-
         filesFound++;
-
         return CONTINUE;
     }
 
@@ -81,13 +78,11 @@ public class BackupFileVisitor implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-
         return CONTINUE;
     }
 
     /**
      * Return the current number of files found by BackUpFileVisitor.
-     *
      * @return the current number of files found
      */
     public int getFilesFound() {
